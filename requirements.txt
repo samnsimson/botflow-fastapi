@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+sqlmodel
+sqlalchemy[asyncio]
+pydantic_settings
+greenlet
+psycopg2-binary
