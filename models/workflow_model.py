@@ -13,7 +13,7 @@ class WorkflowStatusEnum(str, enum.Enum):
 class WorkflowModel(SQLModel):
     name: str = Field(default=None)
     title: str = Field(default=None)
-    description: str = Field(default=None)
+    description: Optional[str] = Field(default=None)
     nodes: Optional[List[Dict[str, Any]]] = Field(sa_column=Column(JSON), default=[])
     edges: Optional[List[Dict[str, Any]]] = Field(sa_column=Column(JSON), default=[])
     status: WorkflowStatusEnum = Field(sa_column=Column(Enum(WorkflowStatusEnum)), default=WorkflowStatusEnum.DRAFT)

@@ -5,3 +5,4 @@ sqlalchemy[asyncio]
 pydantic_settings
 greenlet
 psycopg2-binary
+alembic
