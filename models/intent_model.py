@@ -1,10 +1,11 @@
-from sqlmodel import SQLModel, Field, Column, JSON
+from sqlmodel import SQLModel, Field, Column, JSON, Relationship
 from typing import Optional, List, Dict, Any
 from uuid import UUID, uuid4
-from datetime import datetime, timezone
+from models.base_model import Timestamps
 
 
 class IntentModel(SQLModel):
+    id: Optional[UUID] = Field(default_factory=uuid4, primary_key=True)
     name: str = Field(default=None)
     title: str = Field(default=None)
     description: Optional[str] = Field(default=None)
@@ -15,7 +16,6 @@ class IntentModel(SQLModel):
         arbitrary_types_allowed = True
 
 
-class Intent(IntentModel):
-    id: Optional[UUID] = Field(default_factory=uuid4, primary_key=True)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+class Intent(Timestamps, IntentModel, table=True):
+    workflow_id: Optional[UUID] = Field(foreign_key='workflow.id')
+    workflow: Optional["Workflow"] = Relationship(back_populates='intent')  # type: ignore

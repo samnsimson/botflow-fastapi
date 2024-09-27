@@ -1,7 +1,7 @@
-from sqlmodel import SQLModel, Field, Enum, Column
-from typing import Optional
+from sqlmodel import SQLModel, Field, Enum, Column, Relationship
+from typing import Optional, List
 from uuid import UUID, uuid4
-from datetime import datetime, timezone
+from models.base_model import Timestamps
 import enum
 
 
@@ -11,6 +11,7 @@ class WorkflowStatusEnum(str, enum.Enum):
 
 
 class WorkflowModel(SQLModel):
+    id: Optional[UUID] = Field(default_factory=uuid4, primary_key=True)
     name: str = Field(default=None)
     title: str = Field(default=None)
     description: Optional[str] = Field(default=None)
@@ -20,7 +21,5 @@ class WorkflowModel(SQLModel):
         arbitrary_types_allowed = True
 
 
-class Workflow(WorkflowModel, table=True):
-    id: Optional[UUID] = Field(default_factory=uuid4, primary_key=True)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+class Workflow(Timestamps, WorkflowModel, table=True):
+    intents: List["Intent"] = Relationship(back_populates='workflow')  # type:ignore
