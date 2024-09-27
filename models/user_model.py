@@ -5,11 +5,15 @@ from uuid import uuid4
 from datetime import datetime, timezone
 
 
-class User(SQLModel, table=True):
+class UserModel(SQLModel):
+    first_name: str = Field(default=None)
+    last_name: str = Field(default=None)
+    email: str = Field(default=None)
+    phone: str = Field(default=None)
+    password: str = Field(default=None)
+
+
+class User(UserModel, table=True):
     id: Optional[UUID4] = Field(default_factory=uuid4, primary_key=True)
-    first_name: str
-    last_name: str
-    email: str
-    phone: str
-    password: str
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

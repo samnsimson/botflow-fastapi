@@ -1,5 +1,5 @@
-from sqlmodel import SQLModel, Field, JSON, Enum, Column
-from typing import Optional, List, Dict, Any
+from sqlmodel import SQLModel, Field, Enum, Column
+from typing import Optional
 from uuid import UUID, uuid4
 from datetime import datetime, timezone
 import enum
@@ -14,8 +14,6 @@ class WorkflowModel(SQLModel):
     name: str = Field(default=None)
     title: str = Field(default=None)
     description: Optional[str] = Field(default=None)
-    nodes: Optional[List[Dict[str, Any]]] = Field(sa_column=Column(JSON), default=[])
-    edges: Optional[List[Dict[str, Any]]] = Field(sa_column=Column(JSON), default=[])
     status: WorkflowStatusEnum = Field(sa_column=Column(Enum(WorkflowStatusEnum)), default=WorkflowStatusEnum.DRAFT)
 
     class Config:
