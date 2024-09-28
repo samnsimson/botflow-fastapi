@@ -14,6 +14,11 @@ def get_all_workflow(session: Session = Depends(get_session)):
     return workflow_service.get_all_workflow(session)
 
 
+@router.get('/{workflow_id}', response_model=Workflow)
+def get_workflow_by_id(workflow_id: UUID, session: Session = Depends(get_session)):
+    return workflow_service.get_workflow_by_id(workflow_id, session)
+
+
 @router.get('/execute/{workflow_id}')
 def execute_workflow(workflow_id: UUID, session: Session = Depends(get_session)):
     return workflow_service.execute_workflow(workflow_id, session)

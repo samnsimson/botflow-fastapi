@@ -47,9 +47,9 @@ class WorkflowServices(WorkflowServiceHelper):
             print(f"Error fetching workflow: {e}")
             return None
 
-    def get_workflow_by_id(self, id: UUID, session: Session) -> Workflow:
+    def get_workflow_by_id(self, workflow_id: UUID, session: Session) -> Workflow:
         try:
-            statement = select(Workflow).where(Workflow.id == id)
+            statement = select(Workflow).where(Workflow.id == workflow_id)
             result = session.exec(statement).first()
             return result
         except SQLAlchemyError as e:
