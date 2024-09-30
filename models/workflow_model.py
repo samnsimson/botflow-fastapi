@@ -27,3 +27,4 @@ class Workflow(Timestamps, WorkflowModel, table=True):
     intents: List["Intent"] = Relationship(back_populates='workflow')  # type:ignore
     creator: Optional["User"] = Relationship(back_populates="created_workflows")  # type:ignore
     updater: Optional["User"] = Relationship(back_populates="updated_workflows")  # type:ignore
+    permitted_users: Optional["User"] = Relationship(back_populates="permitted_workflows", link_model="UserWorkflowPermission")  # type:ignore

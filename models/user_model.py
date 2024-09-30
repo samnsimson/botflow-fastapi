@@ -18,4 +18,5 @@ class UserModel(SQLModel):
 
 class User(Timestamps, UserModel, table=True):
     created_workflows: List["Workflow"] = Relationship(back_populates='creator')  # type: ignore
-    updated_workflows: List["Workflow"] = Relationship(back_populates='updator')  # type: ignore
+    updated_workflows: List["Workflow"] = Relationship(back_populates='updater')  # type: ignore
+    permitted_workflows: List["Workflow"] = Relationship(back_populates='permitted_users', link_model="UserWorkflowPermissions")  # type: ignore
