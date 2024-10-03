@@ -1,5 +1,5 @@
 from sqlmodel import Session, select
-from models.intent_model import Intent, IntentModel
+from models import Intent, IntentModel
 
 
 class IntentService:

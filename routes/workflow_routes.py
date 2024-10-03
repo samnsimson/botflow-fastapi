@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from models.workflow_model import WorkflowModel, Workflow
+from models import WorkflowModel, Workflow
 from sqlmodel import Session
 from database import get_session
 from services.workflow_services import workflow_service

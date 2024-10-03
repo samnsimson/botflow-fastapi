@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Query
 from sqlmodel import Session
 from database import get_session
-from models.intent_model import Intent, IntentModel
+from models import Intent, IntentModel
 from typing import List, Optional
 from constants import intent_workflow_id_description
 from services.intent_service import intent_service

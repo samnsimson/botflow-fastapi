@@ -7,10 +7,7 @@ from alembic import context
 from config import config as envconfig
 
 # Models
-from models.workflow_model import Workflow
-from models.intent_model import Intent
-from models.user_model import User
-from models.user_workflow_permission import UserWorkflowPermission
+from models import Workflow, Intent, User, UserWorkflowPermission
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

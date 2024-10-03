@@ -1,4 +1,4 @@
-from models.workflow_model import WorkflowModel, Workflow
+from models import WorkflowModel, Workflow
 from sqlmodel import Session, select
 from sqlalchemy.exc import SQLAlchemyError
 from typing import List, Dict, Any
@@ -41,6 +41,7 @@ class WorkflowServices(WorkflowServiceHelper):
         try:
             statement = select(Workflow)
             result = session.exec(statement).all()
+            print(result)
             return result
         except SQLAlchemyError as e:
             session.rollback()
